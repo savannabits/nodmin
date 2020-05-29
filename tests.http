@@ -1,0 +1,10 @@
+POST "http://localhost:3000/api/users"
+Content-Type: application/json
+Accept: application/json
+
+{
+    username: "csm",
+    "email": "csm@gmail.com",
+    "first_name": "Coolsam",
+    "last_name": "Arrows",
+}

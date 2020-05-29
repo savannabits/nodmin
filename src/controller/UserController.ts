@@ -4,23 +4,31 @@ import {User} from "../entity/User";
 
 export class UserController {
 
-    private userRepository = getRepository(User);
+    private repo = getRepository(User);
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.userRepository.find();
+        let users = await this.repo.createQueryBuilder('users').paginate(request.query.per_page||10, request.query.page||1);
+        return response.status(200).apiResponse(true, "All Users", users);
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return this.userRepository.findOne(request.params.id);
+        let user = await this.repo.findOne(request.params.id);
+        return response.status(200).apiResponse(true, `User ${user.id}`,user);
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        return this.userRepository.save(request.body);
+        try {
+            let res = await this.repo.save(request.body);
+            return response.status(200).apiResponse(true, "User saved successfully",res);
+        } catch(error) {
+            console.log(error)
+            return response.status(400).apiResponse(true, error.message || "server error",error);
+        }
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        let userToRemove = await this.userRepository.findOne(request.params.id);
-        await this.userRepository.remove(userToRemove);
+        let userToRemove = await this.repo.findOne(request.params.id);
+        await this.repo.remove(userToRemove);
     }
 
 }

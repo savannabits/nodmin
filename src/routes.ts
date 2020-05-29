@@ -1,5 +1,6 @@
 import {UserController} from "./controller/UserController";
-
+import {RoleController} from "./controller/RoleController"
+/**<%IMPORTS%>**/
 export const Routes = [{
     method: "get",
     route: "/users",
@@ -22,6 +23,36 @@ export const Routes = [{
     controller: UserController,
     action: "remove"
 },
-
-/**{{APPEND_ROUTES}}*/
+{
+    method: "get",
+    route: "/roles",
+    middleware: [],
+    controller: RoleController,
+    action: "all"
+}, {
+    method: "get",
+    route: "/roles/:id",
+    middleware: [],
+    controller: RoleController,
+    action: "one"
+}, {
+    method: "post",
+    route: "/roles",
+    middleware: [],
+    controller: RoleController,
+    action: "create"
+}, {
+    method: "put",
+    route: "/roles/:id",
+    middleware: [],
+    controller: RoleController,
+    action: "update"
+}, {
+    method: "delete",
+    route: "/roles/:id",
+    middleware: [],
+    controller: RoleController,
+    action: "remove"
+}, 
+/**###APPEND_ROUTES###*/  
 ];

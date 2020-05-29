@@ -6,8 +6,6 @@ export class Role {
     @PrimaryGeneratedColumn()
     id: bigint;
 
-    <%COLUMNS%>
-
     @Column({default: true})
     activated: boolean;
 }
