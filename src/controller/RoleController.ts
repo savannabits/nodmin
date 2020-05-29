@@ -7,7 +7,9 @@ export class RoleController {
     private repo = getRepository(Role);
 
     async all(request: Request, response: Response, next: NextFunction) {
-        let results = await this.repo.createQueryBuilder('roles').paginate(request.query.per_page||10, request.query.page||1);
+        let results = await this.repo.createQueryBuilder('role')
+        .leftJoinAndSelect("role.permissions", "permission")
+        .paginate(request.query.per_page||10, request.query.page||1);
         return response.status(200).apiResponse(true, "Get all roles", results);
     }
 

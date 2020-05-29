@@ -1,26 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
-
-@Entity('users')
-export class User {
-
-    @PrimaryGeneratedColumn()
-    id: bigint;
-
-    @Column({unique: true})
-    username: string;
-
-    @Column({unique: true})
-    email: string;
-
-    @Column()
-    first_name: string;
-
-    @Column({nullable: true})
-    middle_name: string;
-
-    @Column()
-    last_name: string;
-
-    @Column({default: true})
-    activated: boolean;
-}
+import { EntitySchema } from "typeorm";
+import { BaseColumnSchema } from "./base/BaseColumnSchema";
+import { getTableOptions } from "../helpers/database";
+const tableOpts = getTableOptions('users');
+export const User = new EntitySchema(tableOpts);

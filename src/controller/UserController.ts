@@ -7,7 +7,9 @@ export class UserController {
     private repo = getRepository(User);
 
     async all(request: Request, response: Response, next: NextFunction) {
-        let users = await this.repo.createQueryBuilder('users').paginate(request.query.per_page||10, request.query.page||1);
+        let users = await this.repo.createQueryBuilder('user')
+        .leftJoinAndSelect("user.roles","role")
+        .paginate(request.query.per_page||10, request.query.page||1);
         return response.status(200).apiResponse(true, "All Users", users);
     }
 

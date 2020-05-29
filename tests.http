@@ -1,5 +1,4 @@
-POST "http://localhost:3000/api/users"
-Content-Type: application/json
+GET 'http://localhost:3002/api/users" HTTP/1.1
 Accept: application/json
 
 {

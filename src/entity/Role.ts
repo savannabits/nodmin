@@ -1,11 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
-
-@Entity('roles')
-export class Role {
-
-    @PrimaryGeneratedColumn()
-    id: bigint;
-
-    @Column({default: true})
-    activated: boolean;
-}
+import {EntitySchema, EntitySchemaRelationOptions} from "typeorm";
+import { getTableOptions } from "../helpers/database";
+const tableOptions = getTableOptions('roles');
+export const Role = new EntitySchema(tableOptions);
